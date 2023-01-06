@@ -25,15 +25,15 @@ interface RandomUser {
 export function Home() {
   const [randomUsers, setRandomUsers] = useState<RandomUser[]>([]);
   const [filteredRandomUsers, setFilteredRandomUsers] = useState<RandomUser[]>([]);
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState(1);
   const [usersPerPage, setUsersPerPage] = useState(10);
   const [isLoading, setIsLoading] = useState(true);
   
   const [userName, setUserName] = useState('');
   
-  function handleChangeCurrentPage(num: number) {
-    setCurrentPage(num) 
-  }
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  
 
   function filterUsers(query: string) {
     const filteredUsers = randomUsers.filter(user => user.name.first.includes(query));
@@ -50,13 +50,17 @@ export function Home() {
     let nameComplement = userName.substring(1,userName.length).toLowerCase();
     let formattedName = firstLetterName+nameComplement;
     
-    let filteredUsers = randomUsers.filter(user => user.name.first.includes(formattedName));
+    let filteredUsers = randomUsers.filter(user => (
+      user.name.first.includes(formattedName) ||
+      user.email.includes(userName) ||
+        user.login.username.includes(userName)
+    ));
     console.log('aplicando filtro...',formattedName)
     setRandomUsers(filteredUsers)
   }
 
   async function fetchRandomuser() {
-    const response = await fetch(`https://randomuser.me/api/?inc=name,email,login,picture,dob&page=${currentPage}&results=10&seed=xa&noinfo`);
+    const response = await fetch(`https://randomuser.me/api/?inc=name,email,login,picture,dob&results=30&seed=xa&noinfo`);
     // const response = await fetch('https://randomuser.me/api/?page=1&results=10&seed=xa');
     // const response = await fetch('https://randomuser.me/api/?results=10');
     // const response = await fetch('https://randomuser.me/api/?inc=name,email,login,picture,dob');
@@ -93,11 +97,11 @@ export function Home() {
             <th>Username</th>
             <th>Idade</th>
           </tr>
-          {randomUsers.map(user => {
+          {randomUsers.slice(indexOfFirstUser, indexOfLastUser).map(user => {
             return (
               <tr key={user.login.uuid}>
                 <td><img src={user.picture.thumbnail} alt="" /></td>
-                <td>{user.name.first}</td>
+                <td>{user.name.title} {user.name.first} {user.name.last}</td>
                 <td>{user.email}</td>
                 <td>{user.login.username}</td>
                 <td>{user.dob.age}</td>
@@ -107,9 +111,9 @@ export function Home() {
         </tbody>
       </table>
       <>
-        <button onClick={() => handleChangeCurrentPage(1)}>1</button>
-        <button onClick={() => handleChangeCurrentPage(2)}>2</button>
-        <button onClick={() => handleChangeCurrentPage(3)}>3</button>
+        <button onClick={() => setCurrentPage(1)}>1</button>
+        <button onClick={() => setCurrentPage(2)}>2</button>
+        <button onClick={() => setCurrentPage(3)}>3</button>
       </>
     </div>
   )
