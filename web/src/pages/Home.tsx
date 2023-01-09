@@ -31,15 +31,9 @@ export function Home() {
   
   const [userName, setUserName] = useState('');
   
-  const indexOfLastUser = currentPage * usersPerPage;
-  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  let indexOfLastUser = currentPage * usersPerPage;
+  let indexOfFirstUser = indexOfLastUser - usersPerPage;
   
-
-  function filterUsers(query: string) {
-    const filteredUsers = randomUsers.filter(user => user.name.first.includes(query));
-    console.log('aplicando filtro...')
-    setRandomUsers(filteredUsers)
-  }
 
   function handleFilterUsers(event: FormEvent) {
     event.preventDefault();
@@ -53,10 +47,12 @@ export function Home() {
     let filteredUsers = randomUsers.filter(user => (
       user.name.first.includes(formattedName) ||
       user.email.includes(userName) ||
-        user.login.username.includes(userName)
+      user.login.username.includes(userName)
     ));
     console.log('aplicando filtro...',formattedName)
-    setRandomUsers(filteredUsers)
+    setRandomUsers(filteredUsers);
+    indexOfFirstUser = 0;
+    indexOfLastUser = 10;
   }
 
   async function fetchRandomuser() {
@@ -78,7 +74,7 @@ export function Home() {
 
   return (
     <div>
-      <h1>Home Page</h1>
+      <h1>Home Page{randomUsers.length}</h1>
       <form onSubmit={handleFilterUsers}>
         <input 
           type="text" 
