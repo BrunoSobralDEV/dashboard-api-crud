@@ -74,7 +74,7 @@ export function Home() {
 
   return (
     <div>
-      <h1>Home Page{randomUsers.length}</h1>
+      <h1>Home Page{randomUsers.length} - APIRandomUser</h1>
       <form onSubmit={handleFilterUsers}>
         <input 
           type="text" 

@@ -35,7 +35,7 @@ export function Http() {
 
   return (
     <div>
-      <h1>Http Page</h1>
+      <h1>Http Page - API HTTPCat</h1>
       <Select
         isLoading={isLoading}
         options={codes.map( code => {return {value: code, label: code}})}
