@@ -1,0 +1,44 @@
+{
+  "customers": [
+    {
+    "id":1,
+    "name":"Bruno",
+    "email": "brunosobralss@hotmail.com",
+    "phone":"79889550055", 
+    "address": "Av. São paulo, nº 10 - Bairro Centro",
+    "cpf": "02548965225"
+    },
+    {
+    "id":2,
+    "name":"Maria",
+    "email": "maria@hotmail.com",
+    "phone":"79889550055", 
+    "address": "Av. São paulo, nº 10 - Bairro Centro",
+    "cpf": "02548965225"
+    },
+    {
+    "id":3,
+    "name":"Bia",
+    "email": "bia@hotmail.com",
+    "phone":"79889550055", 
+    "address": "Av. São paulo, nº 10 - Bairro Centro",
+    "cpf": "02548965225"
+    },
+    {
+    "id":4,
+    "name":"Ingrid",
+    "email": "ingrid@hotmail.com",
+    "phone":"79889550055", 
+    "address": "Av. São paulo, nº 10 - Bairro Centro",
+    "cpf": "02548965225"
+    },
+    {
+    "id":5,
+    "name":"Carlos",
+    "email": "carlos@hotmail.com",
+    "phone":"79889550055", 
+    "address": "Av. São paulo, nº 10 - Bairro Centro",
+    "cpf": "02548965225"
+    }
+  ]
+}
