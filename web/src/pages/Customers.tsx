@@ -4,6 +4,7 @@ import { Table, Alert, Button, Modal, Form, InputGroup } from 'react-bootstrap';
 
 import { Loading } from '../components/Loading';
 import { Create } from '../components/Crud';
+import axios from 'axios';
 
 interface Customer {
   id: number;
@@ -67,7 +68,7 @@ export function Customers() {
     }
   }
 
-  const setData = (data: Customer) => {
+  function setData(data: Customer) {
     let { id, name, email, phone, address, cpf } = data;
     localStorage.setItem('ID', String(id));
     localStorage.setItem('Name', name);
@@ -77,6 +78,11 @@ export function Customers() {
     localStorage.setItem('CPF', cpf);
 
     handleShow();
+ }
+
+ function onDelete(id:number) {
+  axios.delete(`http://localhost:3000/customers/${id}`)
+    .then(() => fetchCustomers())
  }
 
   useEffect(() => {
@@ -155,7 +161,7 @@ export function Customers() {
                   <td style={{padding: "10px"}}>{customer.address}</td>
                   <td style={{padding: "10px"}}>{customer.cpf}</td>
                   <td style={{padding: "10px"}}>
-                    <button onClick={() => setData(customer)}><Pencil size={24} /></button>  <button><Trash size={24} /></button>
+                    <button onClick={() => setData(customer)}><Pencil size={24} /></button>  <button onClick={() => onDelete(customer.id)}><Trash size={24} /></button>
                   </td>
                 </tr>
               )

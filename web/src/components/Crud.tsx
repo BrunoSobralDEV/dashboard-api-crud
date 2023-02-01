@@ -113,7 +113,7 @@ export function Update({showModal, handleClose}: Create) {
       phone,
       address,
       cpf
-    });
+    })
 
     name ? handleClose() : null;
   }
