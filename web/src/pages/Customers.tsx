@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useState } from 'react'
 import { Pencil, Trash, MagnifyingGlass, UserPlus } from "phosphor-react";
-import {Alert, Button, Modal, Form} from 'react-bootstrap';
+import {Alert, Button, Modal, Form, InputGroup } from 'react-bootstrap';
 
 import { Loading } from '../components/Loading';
 
@@ -69,14 +69,29 @@ export function Customers() {
       
       <div style={{display: "flex", justifyContent: "space-between", padding: "40px 0"}}>
         <Form onSubmit={handleFilterCustomers}>
-          <Form.Group className="mb-6">
+          <InputGroup className="mb-3">
+          <Form.Control
+            placeholder="Busque pelo nome ou e-mail"
+            aria-label="Busque pelo nome ou e-mail"
+            aria-describedby="basic-addon2"
+            value={userName}
+            onChange={event => setUserName(event.target.value)}
+          />
+          <Button variant="outline-secondary" id="button-addon2">
+            Button
+          </Button>
+        </InputGroup>
+          {/* <Form.Group className="mb-6">
             <Form.Control 
               type="text" 
               placeholder='Busque pelo nome ou e-mail' 
               value={userName}
               onChange={event => setUserName(event.target.value)}
             />
-          </Form.Group>
+          <Button className="mb-3" variant="secondary">
+            <MagnifyingGlass size={16} /> Buscar
+          </Button>
+          </Form.Group> */}
           {/* <input 
             style={{width: "220px"}}
             type="text" 
@@ -84,13 +99,12 @@ export function Customers() {
             value={userName}
             onChange={event => setUserName(event.target.value)}
           /> */}
-          <Button className="mb-3" variant="secondary">
-            <MagnifyingGlass size={16} /> Buscar
-          </Button>
           {/* <button ><MagnifyingGlass size={16} /> Buscar</button> */}
         </Form>
 
-        <button onClick={handleShow}>Cadastrar</button>
+        <div>
+          <button onClick={handleShow}>Cadastrar</button>
+        </div>
       </div>
       
       <table>
