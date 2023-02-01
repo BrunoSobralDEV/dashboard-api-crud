@@ -1,10 +1,12 @@
 import { FormEvent, useEffect, useState } from 'react'
 import { Pencil, Trash, MagnifyingGlass, UserPlus } from "phosphor-react";
-import {Alert, Button, Modal, Form, InputGroup } from 'react-bootstrap';
+import { Table, Alert, Button, Modal, Form, InputGroup } from 'react-bootstrap';
 
 import { Loading } from '../components/Loading';
+import { Create } from '../components/Crud';
 
 interface Customer {
+  id: number;
   name: string;
   email: string;
   phone: string;
@@ -18,17 +20,17 @@ export function Customers() {
   const [currentPage, setCurrentPage] = useState(1);
   const [usersPerPage, setUsersPerPage] = useState(10);
   const [isLoading, setIsLoading] = useState(true);
-  
   const [userName, setUserName] = useState('');
-  
-  const [show, setShow] = useState(false);
+  const [msgErroFetchApi, setMsgErroFetchApi] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
 
   let indexOfLastUser = currentPage * usersPerPage;
   let indexOfFirstUser = indexOfLastUser - usersPerPage;
-  
+
+  const refresh = () => window.location.reload();
 
   function handleFilterCustomers(event: FormEvent) {
     event.preventDefault();
@@ -50,15 +52,35 @@ export function Customers() {
   }
 
   async function fetchCustomers() {
-    const response = await fetch(`http://localhost:3000/customers`);
-    const data = await response.json();
-    setCustomers(data);
-    setIsLoading(false);
+    try {
+      const response = await fetch(`http://localhost:3000/customers`);
+      // const response = await fetch(`https://63daa6cc2af48a60a7d33020.mockapi.io/customers`);
+      const data = await response.json();
+      setCustomers(data);
+      setIsLoading(false);
+      
+    } catch (error) {
+      setMsgErroFetchApi('Não foi possível se conectar ao servidor, tente atualizar a página')
+      console.log(error === 'Failed to fetch')
+      console.log('Erro:', error)
+      setIsLoading(false);
+    }
   }
+
+  const setData = (data: Customer) => {
+    let { id, name, email, phone, address, cpf } = data;
+    localStorage.setItem('ID', String(id));
+    localStorage.setItem('Name', name);
+    localStorage.setItem('Email', email);
+    localStorage.setItem('Phone Number', phone);
+    localStorage.setItem('Address', address);
+    localStorage.setItem('CPF', cpf);
+
+    handleShow();
+ }
 
   useEffect(() => {
     fetchCustomers();
-    
   }, [currentPage])
 
   if(isLoading) return <Loading />
@@ -107,91 +129,47 @@ export function Customers() {
         </div>
       </div>
       
-      <table>
-        <tbody>
-          <tr>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Telefone</th>
-            <th>Endereço</th>
-            <th>CPF</th>
-            <th>Editar | Deletar</th>
-          </tr>
-          {customers.slice(indexOfFirstUser, indexOfLastUser).map((customer, index) => {
-            return (
-              <tr key={index}>
-                <td style={{padding: "10px"}}>{customer.name}</td>
-                <td style={{padding: "10px"}}>{customer.email}</td>
-                <td style={{padding: "10px"}}>{customer.phone}</td>
-                <td style={{padding: "10px"}}>{customer.address}</td>
-                <td style={{padding: "10px"}}>{customer.cpf}</td>
-                <td style={{padding: "10px"}}>
-                  <Pencil size={24} /> | <Trash size={24} />
-                </td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+      {msgErroFetchApi && 
+        <Alert key={'msgErroFetchApi'} variant='danger'>
+          {msgErroFetchApi} <span style={{cursor: 'pointer', color: 'blue'}} onClick={refresh}>Aqui!</span>
+      </Alert>
+      }
+
+      {customers.length > 0 &&
+        <Table striped>
+          <tbody>
+            <tr>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Telefone</th>
+              <th>Endereço</th>
+              <th>CPF</th>
+              <th>Editar | Deletar</th>
+            </tr>
+            {customers.slice(indexOfFirstUser, indexOfLastUser).map((customer, index) => {
+              return (
+                <tr key={index}>
+                  <td style={{padding: "10px"}}>{customer.name}</td>
+                  <td style={{padding: "10px"}}>{customer.email}</td>
+                  <td style={{padding: "10px"}}>{customer.phone}</td>
+                  <td style={{padding: "10px"}}>{customer.address}</td>
+                  <td style={{padding: "10px"}}>{customer.cpf}</td>
+                  <td style={{padding: "10px"}}>
+                    <button onClick={() => setData(customer)}><Pencil size={24} /></button>  <button><Trash size={24} /></button>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </Table>
+      }
       <>
         <button onClick={() => setCurrentPage(1)}>1</button>
         {/* <button onClick={() => setCurrentPage(2)}>2</button>
         <button onClick={() => setCurrentPage(3)}>3</button> */}
       </>
       
-      <Modal show={show} onHide={handleClose} backdrop="static">
-      <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Nome</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Nome"
-                autoFocus
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
-              <Form.Label>E-mail</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="name@exemplo.com"
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
-              <Form.Label>Telefone</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="(DDD) 00000-0000"
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
-              <Form.Label>Endereço</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Endereço"
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput5">
-              <Form.Label>CPF</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="000.000.000-00"
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Fechar
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Salvar
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <Create showModal={showModal} handleClose={handleClose}/>
     </div>
   )
 }
