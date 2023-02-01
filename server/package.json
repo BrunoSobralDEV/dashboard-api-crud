@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "api": "json-server server.json -w",
+    "api": "json-server server.json -w --id",
     "delay": "json-server server.json -w -d 500"
   },
   "keywords": [],
