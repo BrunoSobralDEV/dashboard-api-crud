@@ -7,25 +7,36 @@ interface Create {
   handleClose: () => void;
 }
 
-export function Create({showModal, handleClose}: Create) {
+export function CreateModal({showModal, handleClose}: Create) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
   const [cpf, setCpf] = useState('');
   const [validated, setValidated] = useState(false);
+  const [id, setID] = useState(0);
 
+  useEffect(() => {
+    setID(Number(localStorage.getItem('ID')) || 0);
+    setName(localStorage.getItem('Name') || "");
+    setEmail(localStorage.getItem('Email') || "");
+    setPhone(localStorage.getItem('Phone Number') || "")
+    setAddress(localStorage.getItem('Address') || "")
+    setCpf(localStorage.getItem('CPF') || "")
+    
+  }, [showModal]);
 
-  function postData(e) {
+  async function handlePostData(e) {
     e.preventDefault();
 
-    axios.post('http://localhost:3000/customers', {
+    const response = await axios.post('http://localhost:3000/customers', {
       name,
       email,
       phone,
       address,
       cpf
     });
+
 
     name ? handleClose() : null;
   }
@@ -36,7 +47,7 @@ export function Create({showModal, handleClose}: Create) {
         <Modal.Title>Cadastro de Clientes</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={postData}>
+        <Form onSubmit={handlePostData}>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Nome</Form.Label>
             <Form.Control
@@ -94,7 +105,7 @@ export function Create({showModal, handleClose}: Create) {
   );
 };
 
-export function Update({showModal, handleClose}: Create) {
+export function UpdateModal({showModal, handleClose}: Create) {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -104,10 +115,10 @@ export function Update({showModal, handleClose}: Create) {
   const [id, setID] = useState(0);
 
 
-  function postData(e) {
+  async function handlePostData(e) {
     e.preventDefault();
 
-    axios.post('http://localhost:3000/customers', {
+    await axios.put(`http://localhost:3000/customers/${id}`, {
       name,
       email,
       phone,
@@ -130,10 +141,10 @@ export function Update({showModal, handleClose}: Create) {
   return (
     <Modal show={showModal} onHide={handleClose} backdrop="static">
       <Modal.Header closeButton>
-        <Modal.Title>Cadastro de Clientes</Modal.Title>
+        <Modal.Title>Editar Clientes</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={postData}>
+        <Form onSubmit={handlePostData}>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Nome</Form.Label>
             <Form.Control
@@ -141,6 +152,7 @@ export function Update({showModal, handleClose}: Create) {
               placeholder="Nome"
               autoFocus
               onChange={(e) => setName(e.target.value)}
+              value={name}
               required
             />
           </Form.Group>
@@ -150,6 +162,7 @@ export function Update({showModal, handleClose}: Create) {
               type="email"
               placeholder="name@exemplo.com"
               onChange={(e) => setEmail(e.target.value)}
+              value={email}
               required
             />
           </Form.Group>
@@ -159,6 +172,7 @@ export function Update({showModal, handleClose}: Create) {
               type="text"
               placeholder="(DDD) 00000-0000"
               onChange={(e) => setPhone(e.target.value)}
+              value={phone}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
@@ -167,6 +181,7 @@ export function Update({showModal, handleClose}: Create) {
               type="text"
               placeholder="Endereço"
               onChange={(e) => setAddress(e.target.value)}
+              value={address}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput5">
@@ -175,6 +190,7 @@ export function Update({showModal, handleClose}: Create) {
               type="text"
               placeholder="000.000.000-00"
               onChange={(e) => setCpf(e.target.value)}
+              value={cpf}
             />
           </Form.Group>
           <Modal.Footer>
@@ -190,10 +206,3 @@ export function Update({showModal, handleClose}: Create) {
     </Modal>
   );
 };
-
-
-export function Delete() {
-  return (
-    <div>Create</div>
-  )
-}

@@ -3,7 +3,7 @@ import { Pencil, Trash, MagnifyingGlass, UserPlus } from "phosphor-react";
 import { Table, Alert, Button, Modal, Form, InputGroup } from 'react-bootstrap';
 
 import { Loading } from '../components/Loading';
-import { Create } from '../components/Crud';
+import { CreateModal, UpdateModal } from '../components/Crud';
 import axios from 'axios';
 
 interface Customer {
@@ -23,10 +23,19 @@ export function Customers() {
   const [isLoading, setIsLoading] = useState(true);
   const [userName, setUserName] = useState('');
   const [msgErroFetchApi, setMsgErroFetchApi] = useState('');
-  const [showModal, setShowModal] = useState(false);
+  const [showModalCreate, setShowModalCreate] = useState(false);
+  const [showModalUpdate, setShowModalUpdate] = useState(false);
 
-  const handleClose = () => setShowModal(false);
-  const handleShow = () => setShowModal(true);
+  const handleCloseCreate = () => {
+    setShowModalCreate(false);
+    fetchCustomers();
+  };
+  const handleCloseUpdate = () => {
+    setShowModalUpdate(false);
+    fetchCustomers();
+  };
+  const handleShowCreate = () => setShowModalCreate(true);
+  const handleShowUpdate = () => setShowModalUpdate(true);
 
   let indexOfLastUser = currentPage * usersPerPage;
   let indexOfFirstUser = indexOfLastUser - usersPerPage;
@@ -46,7 +55,7 @@ export function Customers() {
       customer.name.includes(formattedName) ||
       customer.email.includes(userName)
     ));
-    console.log('aplicando filtro...',formattedName)
+    
     setCustomers(filteredUsers);
     indexOfFirstUser = 0;
     indexOfLastUser = 10;
@@ -68,7 +77,7 @@ export function Customers() {
     }
   }
 
-  function setData(data: Customer) {
+  function setDataToLocalStorage(data: Customer) {
     let { id, name, email, phone, address, cpf } = data;
     localStorage.setItem('ID', String(id));
     localStorage.setItem('Name', name);
@@ -76,14 +85,15 @@ export function Customers() {
     localStorage.setItem('Phone Number', phone);
     localStorage.setItem('Address', address);
     localStorage.setItem('CPF', cpf);
-
-    handleShow();
+    
+    handleShowUpdate();
  }
 
- function onDelete(id:number) {
-  axios.delete(`http://localhost:3000/customers/${id}`)
-    .then(() => fetchCustomers())
+ async function handleCustomerDelete(id:number) {
+  const response = await axios.delete(`http://localhost:3000/customers/${id}`)
+    .then(() => fetchCustomers());
  }
+
 
   useEffect(() => {
     fetchCustomers();
@@ -93,7 +103,7 @@ export function Customers() {
 
   return (
     <div>
-      <h1>Lista de Clientes - JSONServer</h1>
+      <h1>Lista de Clientes</h1>
       
       <div style={{display: "flex", justifyContent: "space-between", padding: "40px 0"}}>
         <Form onSubmit={handleFilterCustomers}>
@@ -109,29 +119,10 @@ export function Customers() {
             Button
           </Button>
         </InputGroup>
-          {/* <Form.Group className="mb-6">
-            <Form.Control 
-              type="text" 
-              placeholder='Busque pelo nome ou e-mail' 
-              value={userName}
-              onChange={event => setUserName(event.target.value)}
-            />
-          <Button className="mb-3" variant="secondary">
-            <MagnifyingGlass size={16} /> Buscar
-          </Button>
-          </Form.Group> */}
-          {/* <input 
-            style={{width: "220px"}}
-            type="text" 
-            placeholder='Busque pelo nome ou e-mail' 
-            value={userName}
-            onChange={event => setUserName(event.target.value)}
-          /> */}
-          {/* <button ><MagnifyingGlass size={16} /> Buscar</button> */}
         </Form>
 
         <div>
-          <button onClick={handleShow}>Cadastrar</button>
+          <button onClick={handleShowCreate}>Cadastrar</button>
         </div>
       </div>
       
@@ -161,7 +152,12 @@ export function Customers() {
                   <td style={{padding: "10px"}}>{customer.address}</td>
                   <td style={{padding: "10px"}}>{customer.cpf}</td>
                   <td style={{padding: "10px"}}>
-                    <button onClick={() => setData(customer)}><Pencil size={24} /></button>  <button onClick={() => onDelete(customer.id)}><Trash size={24} /></button>
+                    <button style={{color: '#8f8f3f'}} onClick={() => setDataToLocalStorage(customer)}>
+                      <Pencil size={24} />
+                    </button>{" "}
+                    <button style={{color: '#ff0000'}} onClick={() => handleCustomerDelete(customer.id)}>
+                      <Trash size={24} />
+                    </button>
                   </td>
                 </tr>
               )
@@ -175,7 +171,8 @@ export function Customers() {
         <button onClick={() => setCurrentPage(3)}>3</button> */}
       </>
       
-      <Create showModal={showModal} handleClose={handleClose}/>
+      <CreateModal showModal={showModalCreate} handleClose={handleCloseCreate}/>
+      <UpdateModal showModal={showModalUpdate} handleClose={handleCloseUpdate}/>
     </div>
   )
 }
