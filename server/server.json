@@ -23,22 +23,6 @@
       "phone": "79889550055",
       "address": "Av. São paulo, nº 10 - Bairro Centro",
       "cpf": "02548965225"
-    },
-    {
-      "name": "123",
-      "email": "123@hot",
-      "phone": "",
-      "address": "",
-      "cpf": "",
-      "id": 4
-    },
-    {
-      "name": "123",
-      "email": "hot@hot",
-      "phone": "",
-      "address": "",
-      "cpf": "",
-      "id": 5
     }
   ]
 }
