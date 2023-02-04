@@ -36,7 +36,7 @@ export function RandomDogs() {
 
 
   return (
-    <div>
+    <div className="vh-100">
       <h1>Random Dogs</h1>
       <div style={{height: "300px", marginBottom: "10px"}}>
         {isLoading && <Loading />}

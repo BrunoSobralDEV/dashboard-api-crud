@@ -34,7 +34,7 @@ export function Http() {
   },[statusCode])
 
   return (
-    <div>
+    <div className="vh-100">
       <h1>Http Page - API HTTPCat</h1>
       <Select
         isLoading={isLoading}

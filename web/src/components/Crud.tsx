@@ -130,12 +130,12 @@ export function UpdateModal({showModal, handleClose}: Create) {
   }
 
   useEffect(() => {
-    setID(Number(localStorage.getItem('ID')) || 0);
-    setName(localStorage.getItem('Name') || "");
-    setEmail(localStorage.getItem('Email') || "");
-    setPhone(localStorage.getItem('Phone Number') || "")
-    setAddress(localStorage.getItem('Address') || "")
-    setCpf(localStorage.getItem('CPF') || "")
+      setID(Number(localStorage.getItem('ID')) || 0);
+      setName(localStorage.getItem('Name') || "");
+      setEmail(localStorage.getItem('Email') || "");
+      setPhone(localStorage.getItem('Phone Number') || "")
+      setAddress(localStorage.getItem('Address') || "")
+      setCpf(localStorage.getItem('CPF') || "")
   }, []);
 
   return (

@@ -74,17 +74,22 @@ export function RandomUsers() {
 
   return (
     <div>
-      <h1>Home Page{randomUsers.length} - APIRandomUser</h1>
-      <form onSubmit={handleFilterUsers}>
-        <input 
-          type="text" 
-          placeholder='Busque pelo nome, e-mail ou username do usuário' 
-          value={userName}
-          onChange={event => setUserName(event.target.value)}
-        />
-        <button >Buscar</button>
+      <h1 className='h2'>Home Page{randomUsers.length} - APIRandomUser</h1>
+      <form onSubmit={handleFilterUsers} className="row g-2 m-3 justify-content-md-between">
+        <div className='col-auto'>
+          <input 
+            className='form-control'
+            type="text" 
+            placeholder='Busque pelo nome, e-mail ou username do usuário' 
+            value={userName}
+            onChange={event => setUserName(event.target.value)}
+          />
+        </div>
+        <div className='col-auto'>
+          <button className="btn btn-primary">Buscar</button>
+        </div>
       </form>
-      <table>
+      <table className='table table-striped table-sm'>
         <tbody>
           <tr>
             <th>Foto do Usuário</th>
@@ -106,11 +111,19 @@ export function RandomUsers() {
           })}
         </tbody>
       </table>
-      <>
+      {/* <>
         <button onClick={() => setCurrentPage(1)}>1</button>
         <button onClick={() => setCurrentPage(2)}>2</button>
         <button onClick={() => setCurrentPage(3)}>3</button>
-      </>
+      </> */}
+      <nav aria-label="Page navigation" className=' d-flex justify-content-end'>
+        <ul className="pagination">
+          <li className="page-item"><span role="button" onClick={() => setCurrentPage(1)} className="page-link" href="#">1</span></li>
+          <li className="page-item"><span role="button" onClick={() => setCurrentPage(2)} className="page-link" href="#">2</span></li>
+          <li className="page-item"><span role="button" onClick={() => setCurrentPage(3)} className="page-link" href="#">3</span></li>
+        </ul>
+      </nav>
+
     </div>
   )
 }

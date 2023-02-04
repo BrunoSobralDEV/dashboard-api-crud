@@ -122,7 +122,7 @@ export function Customers() {
         </Form>
 
         <div>
-          <button onClick={handleShowCreate}>Cadastrar</button>
+          <button className="btn btn-primary" onClick={handleShowCreate}>Cadastrar</button>
         </div>
       </div>
       
@@ -133,7 +133,7 @@ export function Customers() {
       }
 
       {customers.length > 0 &&
-        <Table striped>
+        <Table striped size='sm'>
           <tbody>
             <tr>
               <th>Nome</th>
@@ -152,12 +152,12 @@ export function Customers() {
                   <td style={{padding: "10px"}}>{customer.address}</td>
                   <td style={{padding: "10px"}}>{customer.cpf}</td>
                   <td style={{padding: "10px"}}>
-                    <button style={{color: '#8f8f3f'}} onClick={() => setDataToLocalStorage(customer)}>
-                      <Pencil size={24} />
-                    </button>{" "}
-                    <button style={{color: '#ff0000'}} onClick={() => handleCustomerDelete(customer.id)}>
-                      <Trash size={24} />
-                    </button>
+                    <span style={{color: '#8f8f3f', cursor: 'pointer'}} onClick={() => setDataToLocalStorage(customer)}>
+                      <Pencil size={20} />
+                    </span>{" "}
+                    <span style={{color: '#ff0000', cursor: 'pointer'}} onClick={() => handleCustomerDelete(customer.id)}>
+                      <Trash size={20} />
+                    </span>
                   </td>
                 </tr>
               )
@@ -165,11 +165,13 @@ export function Customers() {
           </tbody>
         </Table>
       }
-      <>
-        <button onClick={() => setCurrentPage(1)}>1</button>
-        {/* <button onClick={() => setCurrentPage(2)}>2</button>
-        <button onClick={() => setCurrentPage(3)}>3</button> */}
-      </>
+      <nav aria-label="Page navigation" className=' d-flex justify-content-end'>
+        <ul className="pagination">
+          <li className="page-item"><span role="button" onClick={() => setCurrentPage(1)} className="page-link" href="#">1</span></li>
+          {/* <li className="page-item"><span role="button" onClick={() => setCurrentPage(2)} className="page-link" href="#">2</span></li>
+          <li className="page-item"><span role="button" onClick={() => setCurrentPage(3)} className="page-link" href="#">3</span></li> */}
+        </ul>
+      </nav>
       
       <CreateModal showModal={showModalCreate} handleClose={handleCloseCreate}/>
       <UpdateModal showModal={showModalUpdate} handleClose={handleCloseUpdate}/>
