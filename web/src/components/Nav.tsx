@@ -37,6 +37,13 @@ export function Menu() {
           </li>
         </ul>
         <hr />
+        <p>
+          <strong>Techs: </strong><br/>
+          <span><strong>Front-end: </strong>ReactJS, HTML5, CSS3</span><br/>
+          <span><strong>Back-end: </strong>Node, Firebase, MySQL</span><br/>
+          <span><strong>UI: </strong>Bootstrap, PhosphorIcons</span>
+        </p>
+        <hr />
         <div className="dropdown">
           <a href="#" className="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="https://github.com/mdo.png" alt="" width={32} height={32} className="rounded-circle me-2" />

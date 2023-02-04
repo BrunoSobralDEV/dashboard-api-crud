@@ -73,7 +73,7 @@ export function RandomUsers() {
   if(isLoading) return <Loading />
 
   return (
-    <div>
+    <div  className="vh-100">
       <h1 className='h2'>Home Page{randomUsers.length} - APIRandomUser</h1>
       <form onSubmit={handleFilterUsers} className="row g-2 m-3 justify-content-md-between">
         <div className='col-auto'>
@@ -101,7 +101,7 @@ export function RandomUsers() {
           {randomUsers.slice(indexOfFirstUser, indexOfLastUser).map(user => {
             return (
               <tr key={user.login.uuid}>
-                <td><img src={user.picture.thumbnail} alt="" /></td>
+                <td><img  className="rounded-circle" src={user.picture.thumbnail} alt="" /></td>
                 <td>{user.name.title} {user.name.first} {user.name.last}</td>
                 <td>{user.email}</td>
                 <td>{user.login.username}</td>

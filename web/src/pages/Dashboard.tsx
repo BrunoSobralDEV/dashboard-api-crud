@@ -10,10 +10,10 @@ export function Dashboard() {
       <Menu />
 
       <div className="d-flex vw-100 vh-100 justify-content-center align-items-center" style={{marginLeft: "280px"}}>
-        {/* <RandomUsers /> */}
+        <RandomUsers />
         {/* <Http />   */}
         {/* <RandomDogs /> */}
-        <Customers />
+        {/* <Customers /> */}
       </div>
     </div>
   )
