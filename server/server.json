@@ -1,44 +1,28 @@
 {
   "customers": [
     {
-      "id": 1,
       "name": "Bruno",
       "email": "brunosobralss@hotmail.com",
-      "phone": "79889550055",
+      "phone": "(79) 98811-3880",
       "address": "Av. São paulo, nº 10 - Bairro Centro",
-      "cpf": "02548965225"
+      "cpf": "123.456.789-10",
+      "id": 1
     },
     {
-      "id": 2,
       "name": "Maria",
       "email": "maria@hotmail.com",
-      "phone": "79889550055",
-      "address": "Av. São paulo, nº 10 - Bairro Centro",
-      "cpf": "02548965225"
+      "phone": "(11) 28895-5005",
+      "address": "Av. João Batista, nº 05 - Bairro Getúlio Vargas",
+      "cpf": "123.456.789-10",
+      "id": 2
     },
     {
-      "id": 3,
       "name": "Bia",
       "email": "bia@hotmail.com",
       "phone": "79889550055",
       "address": "Av. São paulo, nº 10 - Bairro Centro",
-      "cpf": "02548965225"
-    },
-    {
-      "name": "123",
-      "email": "123@hot",
-      "phone": "",
-      "address": "",
-      "cpf": "",
-      "id": 4
-    },
-    {
-      "name": "123",
-      "email": "hot@hot",
-      "phone": "",
-      "address": "",
-      "cpf": "",
-      "id": 5
+      "cpf": "123.456.789-10",
+      "id": 3
     }
   ]
 }
