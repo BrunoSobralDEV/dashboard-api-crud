@@ -22,7 +22,7 @@ interface RandomUser {
   };
 }
 
-export function Home() {
+export function RandomUsers() {
   const [randomUsers, setRandomUsers] = useState<RandomUser[]>([]);
   const [filteredRandomUsers, setFilteredRandomUsers] = useState<RandomUser[]>([]);
   const [currentPage, setCurrentPage] = useState(1);

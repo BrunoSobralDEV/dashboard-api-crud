@@ -3,17 +3,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import { Customers } from './pages/Customers';
 import { Dashboard } from './pages/Dashboard';
-import { Home } from './pages/Home'
+import { RandomUsers } from './pages/RandomUsers'
 import { Http } from './pages/Http'
 import { RandomDogs } from './pages/RandomDogs'
+import { SignIn } from './pages/SignIn';
 
 function App() {
 return (
-    // <Home />  
+    // <RandomUsers />  
     // <Http />  
     // <RandomDogs />
     // <Customers />
     <Dashboard />
+    // <SignIn />
   )
 }
 
