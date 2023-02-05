@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 export function Menu() {
   return (
     <>
@@ -11,29 +13,29 @@ export function Menu() {
         </div>
         <hr />
         <ul className="nav nav-pills flex-column mb-auto">
-          <li className="nav-item">
-            <a href="#" className="nav-link active" aria-current="page">
+          <li>
+            <NavLink to="/dashboard/" className="nav-link">
               <svg className="bi pe-none me-2" width={16} height={16}><use xlinkHref="#home" /></svg>
               Random Users Generator
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a href="#" className="nav-link link-dark">
+            <NavLink to="/dashboard/httpapi" className="nav-link">
               <svg className="bi pe-none me-2" width={16} height={16}><use xlinkHref="#speedometer2" /></svg>
               Http Cats
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a href="#" className="nav-link link-dark">
+            <NavLink to="/dashboard/randomdogs" className="nav-link">
               <svg className="bi pe-none me-2" width={16} height={16}><use xlinkHref="#table" /></svg>
               Random Dog
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a href="#" className="nav-link link-dark">
+            <NavLink to="/dashboard/customers" className="nav-link">
               <svg className="bi pe-none me-2" width={16} height={16}><use xlinkHref="#grid" /></svg>
               Cadastro de Clientes
-            </a>
+            </NavLink>
           </li>
         </ul>
         <hr />

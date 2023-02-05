@@ -7,6 +7,7 @@ import { RandomUsers } from './pages/RandomUsers'
 import { Http } from './pages/Http'
 import { RandomDogs } from './pages/RandomDogs'
 import { SignIn } from './pages/SignIn';
+import { Router } from './Router';
 
 function App() {
 return (
@@ -14,7 +15,7 @@ return (
     // <Http />  
     // <RandomDogs />
     // <Customers />
-    <Dashboard />
+    <Router />
     // <SignIn />
   )
 }
