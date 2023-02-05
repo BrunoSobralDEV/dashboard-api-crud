@@ -122,7 +122,7 @@ export function Customers() {
         </Form>
 
         <div>
-          <button className="btn btn-primary" onClick={handleShowCreate}>Cadastrar</button>
+          <button className="btn btn-outline-primary" onClick={handleShowCreate}>Cadastrar</button>
         </div>
       </div>
       

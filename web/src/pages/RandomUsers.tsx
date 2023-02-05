@@ -74,9 +74,9 @@ export function RandomUsers() {
 
   return (
     <div  className="vh-100">
-      <h1 className='h2'>Home Page{randomUsers.length} - APIRandomUser</h1>
-      <form onSubmit={handleFilterUsers} className="row g-2 m-3 justify-content-md-between">
-        <div className='col-auto'>
+      <h1 className='h2'>API RandomUser</h1>
+      <form onSubmit={handleFilterUsers} className="row g-2 my-3 w-100">
+        <div className='col-11'>
           <input 
             className='form-control'
             type="text" 
@@ -85,32 +85,35 @@ export function RandomUsers() {
             onChange={event => setUserName(event.target.value)}
           />
         </div>
-        <div className='col-auto'>
-          <button className="btn btn-primary">Buscar</button>
+        <div className='col-1'>
+          <button className="btn btn-outline-primary">Buscar</button>
         </div>
       </form>
-      <table className='table table-striped table-sm'>
-        <tbody>
-          <tr>
-            <th>Foto do Usuário</th>
-            <th>Nome Completo</th>
-            <th>Email</th>
-            <th>Username</th>
-            <th>Idade</th>
-          </tr>
-          {randomUsers.slice(indexOfFirstUser, indexOfLastUser).map(user => {
-            return (
-              <tr key={user.login.uuid}>
-                <td><img  className="rounded-circle" src={user.picture.thumbnail} alt="" /></td>
-                <td>{user.name.title} {user.name.first} {user.name.last}</td>
-                <td>{user.email}</td>
-                <td>{user.login.username}</td>
-                <td>{user.dob.age}</td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+      {/* <div className='' style={{background: "#fff",border: "1px solid #fff",borderRadius: "6px",padding: "5px"}}> */}
+        <table className='table table-sm'>
+          <tbody>
+            <tr style={{color: "#8a9aa9"}}>
+              <th>Foto do Usuário</th>
+              <th>Nome Completo</th>
+              <th>Email</th>
+              <th>Username</th>
+              <th>Idade</th>
+            </tr>
+            {randomUsers.slice(indexOfFirstUser, indexOfLastUser).map(user => {
+              return (
+                <tr key={user.login.uuid}>
+                  <td><img  className="rounded-circle" src={user.picture.thumbnail} alt="" /></td>
+                  <td>{user.name.title} {user.name.first} {user.name.last}</td>
+                  <td>{user.email}</td>
+                  <td>{user.login.username}</td>
+                  <td>{user.dob.age}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+
+      {/* </div> */}
       {/* <>
         <button onClick={() => setCurrentPage(1)}>1</button>
         <button onClick={() => setCurrentPage(2)}>2</button>

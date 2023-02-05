@@ -1,9 +1,10 @@
+import { Cat, Dog, PawPrint, Shuffle, UserCirclePlus } from "phosphor-react";
 import { NavLink } from "react-router-dom";
 
 export function Menu() {
   return (
     <>
-      <div className="d-flex flex-column flex-shrink-0 p-3 bg-light fixed-top" style={{height: "100vh", width: '280px'}}>
+      <div className="d-flex flex-column flex-shrink-0 p-3 bg-light fixed-top text-start" style={{height: "100vh", width: '280px'}}>
         <div className="d-flex flex-column">
           <a href="/" className="d-flex link-dark text-decoration-none">
             <img className="me-2" src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width={40} height={32} />
@@ -14,27 +15,28 @@ export function Menu() {
         <hr />
         <ul className="nav nav-pills flex-column mb-auto">
           <li>
-            <NavLink to="/dashboard/" className="nav-link">
-              <svg className="bi pe-none me-2" width={16} height={16}><use xlinkHref="#home" /></svg>
-              Random Users Generator
+            <NavLink to="/dashboard/" className="nav-link d-flex align-items-center gap-2">
+              <Shuffle size={20} />
+                Random Users Generator
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/httpapi" className="nav-link">
-              <svg className="bi pe-none me-2" width={16} height={16}><use xlinkHref="#speedometer2" /></svg>
+            <NavLink to="/dashboard/httpapi" className="nav-link d-flex align-items-center gap-2">
+            <Cat size={20} />
               Http Cats
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/randomdogs" className="nav-link">
-              <svg className="bi pe-none me-2" width={16} height={16}><use xlinkHref="#table" /></svg>
-              Random Dog
+            <NavLink to="/dashboard/randomdogs" className="nav-link d-flex align-items-center gap-2">
+            <Dog size={20} />
+              <span>Random Dog</span>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/customers" className="nav-link">
-              <svg className="bi pe-none me-2" width={16} height={16}><use xlinkHref="#grid" /></svg>
-              Cadastro de Clientes
+            <NavLink to="/dashboard/customers" className="nav-link d-flex align-items-center gap-2">
+              <UserCirclePlus size={20} />
+              {/* <svg className="bi pe-none me-2" width={16} height={16}><use xlinkHref="#grid" /></svg> */}
+              <span>Cadastro de Clientes</span>
             </NavLink>
           </li>
         </ul>
@@ -48,7 +50,7 @@ export function Menu() {
         <hr />
         <div className="dropdown">
           <a href="#" className="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="" width={32} height={32} className="rounded-circle me-2" />
+            <img src="https://github.com/BrunoSobralDEV.png" alt="" width={32} height={32} className="rounded-circle me-2" />
             <strong>BrunoSobral</strong>
           </a>
           <ul className="dropdown-menu text-small shadow">

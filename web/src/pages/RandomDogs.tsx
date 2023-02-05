@@ -17,33 +17,25 @@ export function RandomDogs() {
 
   useEffect(() => {
 
-    fetchRandomDogs()
-    // const downloadImage = async (url: string) => {
-    //   const imageBlob = await fetchHttpCats(url);
-    //   const data = await imageBlob.json()
-    //   // const imageBase64 = URL.createObjectURL(imageBlob);
-    //   setImgResponse(data)
-    // }
-
-    // async function fetchHttpCats(url: string) {
-    //   const response = await fetch(url);
-    //   const data = await response.text()
-    //   // console.log(data)
-    //   return data
-    // }
-    // downloadImage('https://random.dog/woof.json')    
+    fetchRandomDogs()  
   }, [])
 
 
   return (
-    <div className="vh-100">
-      <h1>Random Dogs</h1>
-      <div style={{height: "300px", marginBottom: "10px"}}>
-        {isLoading && <Loading />}
-        {!isLoading && <img id='img'src={imgResponse} alt="" style={{height:"100%"}}/>}
+    <div className="w-30">
+      <div className="card mb-4 rounded-3 shadow-sm">
+        <div className="card-header py-3">
+          <h4 className="my-0 fw-normal">Random Dogs</h4>
+        </div>
+        <div className="card-body">
+          <div style={{height: "300px", marginBottom: "10px"}}>
+            {isLoading && <Loading />}
+            {!isLoading && <img id='img'src={imgResponse} alt="" style={{height:"100%"}}/>}
 
+          </div>
+          <button type="button" className="w-100 btn btn-lg btn-outline-primary" onClick={fetchRandomDogs}>{isLoading?"Loading...":"Próxima"}</button>
+        </div>
       </div>
-      <button onClick={fetchRandomDogs}>{isLoading?"Loading...":"Refresh"}</button>
     </div>
   )
 }
