@@ -39,7 +39,7 @@ export function Http() {
       <Select
         isLoading={isLoading}
         options={codes.map( code => {return {value: code, label: code}})}
-        onChange={(option: OptionProps) => setStatusCode(option.label)} 
+        onChange={(option: any) => setStatusCode(option.label)} 
       />
       <img id='img'src={imgResponse} alt="" />
     </div>
