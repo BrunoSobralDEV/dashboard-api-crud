@@ -11,8 +11,6 @@ export function RandomDogs() {
     const data: {fileSizeBytes: number, url: string } = await response.json();
     setImgResponse(data.url);
     setIsLoading(false)
-    console.log(data.url);
-    console.log(imgResponse)
   }
 
   useEffect(() => {

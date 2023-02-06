@@ -44,7 +44,7 @@ export function Menu() {
         <p>
           <strong>Techs: </strong><br/>
           <span><strong>Front-end: </strong>ReactJS, HTML5, CSS3</span><br/>
-          <span><strong>Back-end: </strong>Node, Firebase, MySQL</span><br/>
+          <span><strong>Back-end: </strong><s>Node, Firebase, MySQL</s></span><br/>
           <span><strong>UI: </strong>Bootstrap, PhosphorIcons</span>
         </p>
         <hr />

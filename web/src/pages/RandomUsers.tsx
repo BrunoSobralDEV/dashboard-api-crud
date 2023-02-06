@@ -49,7 +49,6 @@ export function RandomUsers() {
       user.email.includes(userName) ||
       user.login.username.includes(userName)
     ));
-    console.log('aplicando filtro...',formattedName)
     setRandomUsers(filteredUsers);
     indexOfFirstUser = 0;
     indexOfLastUser = 10;
