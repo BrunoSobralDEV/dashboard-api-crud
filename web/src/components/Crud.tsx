@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap"
 import axios from 'axios';
 
-interface Create {
+import { apiURL } from "../lib/api";
+import { Loading } from "./Loading";
+
+interface Modal {
   showModal: boolean;
   handleClose: () => void;
 }
 
-export function CreateModal({showModal, handleClose}: Create) {
+export function CreateModal({showModal, handleClose}: Modal) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -15,6 +18,7 @@ export function CreateModal({showModal, handleClose}: Create) {
   const [cpf, setCpf] = useState('');
   const [validated, setValidated] = useState(false);
   const [id, setID] = useState(0);
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     setID(Number(localStorage.getItem('ID')) || 0);
@@ -23,13 +27,15 @@ export function CreateModal({showModal, handleClose}: Create) {
     setPhone(localStorage.getItem('Phone Number') || "")
     setAddress(localStorage.getItem('Address') || "")
     setCpf(localStorage.getItem('CPF') || "")
+    setLoading(false)
     
   }, [showModal]);
 
   async function handlePostData(event: any) {
     event.preventDefault();
+    setLoading(true);
 
-    const response = await axios.post('http://localhost:3000/customers', {
+    await axios.post(apiURL, {
       name,
       email,
       phone,
@@ -37,7 +43,7 @@ export function CreateModal({showModal, handleClose}: Create) {
       cpf
     });
 
-
+    
     name ? handleClose() : null;
   }
 
@@ -95,8 +101,8 @@ export function CreateModal({showModal, handleClose}: Create) {
             <Button variant="secondary" onClick={handleClose}>
               Fechar
             </Button>
-            <Button variant="primary" type="submit"> 
-              Salvar
+            <Button variant="primary" type="submit" disabled={isLoading}> 
+              {isLoading ? <Loading size="sm" /> : 'Salvar'}
             </Button>
           </Modal.Footer>
         </Form>
@@ -105,7 +111,7 @@ export function CreateModal({showModal, handleClose}: Create) {
   );
 };
 
-export function UpdateModal({showModal, handleClose}: Create) {
+export function UpdateModal({showModal, handleClose}: Modal) {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -118,7 +124,7 @@ export function UpdateModal({showModal, handleClose}: Create) {
   async function handlePostData(event: any) {
     event.preventDefault();
 
-    await axios.put(`http://localhost:3000/customers/${id}`, {
+    await axios.put(`${apiURL}${id}`, {
       name,
       email,
       phone,

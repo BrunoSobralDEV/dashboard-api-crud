@@ -1,10 +1,11 @@
 import { FormEvent, useEffect, useState } from 'react'
-import { Pencil, Trash, MagnifyingGlass, UserPlus } from "phosphor-react";
-import { Table, Alert, Button, Modal, Form, InputGroup } from 'react-bootstrap';
+import { Pencil, Trash } from "phosphor-react";
+import { Table, Alert, Button, Form, InputGroup } from 'react-bootstrap';
+import axios from 'axios';
 
 import { Loading } from '../components/Loading';
 import { CreateModal, UpdateModal } from '../components/Crud';
-import axios from 'axios';
+import { apiURL } from '../lib/api';
 
 interface Customer {
   id: number;
@@ -21,6 +22,7 @@ export function Customers() {
   const [currentPage, setCurrentPage] = useState(1);
   const [usersPerPage, setUsersPerPage] = useState(10);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingBtn, setIsLoadingBtn] = useState(true);
   const [userName, setUserName] = useState('');
   const [msgErroFetchApi, setMsgErroFetchApi] = useState('');
   const [showModalCreate, setShowModalCreate] = useState(false);
@@ -63,8 +65,7 @@ export function Customers() {
 
   async function fetchCustomers() {
     try {
-      const response = await fetch(`http://localhost:3000/customers`);
-      // const response = await fetch(`https://63daa6cc2af48a60a7d33020.mockapi.io/customers`);
+      const response = await fetch(`${apiURL}`);
       const data = await response.json();
       setCustomers(data);
       setIsLoading(false);
@@ -90,7 +91,7 @@ export function Customers() {
  }
 
  async function handleCustomerDelete(id:number) {
-  const response = await axios.delete(`http://localhost:3000/customers/${id}`)
+  const response = await axios.delete(`${apiURL}${id}`)
     .then(() => fetchCustomers());
  }
 
