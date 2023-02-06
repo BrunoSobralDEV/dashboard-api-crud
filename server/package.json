@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "api": "json-server server.json -w --id",
-    "delay": "json-server server.json -w -d 500"
+    "start": "node server.js",
+    "api": "json-server db.json -w --id",
+    "delay": "json-server db.json -w -d 500"
   },
   "keywords": [],
   "author": "",
