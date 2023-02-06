@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 export function SignIn() {
   return(
     <main className="d-flex justify-content-center align-items-center vh-100">
@@ -19,6 +21,7 @@ export function SignIn() {
         </div>
         <button className="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
       </form>
+      <NavLink to="/dashboard/"><span>go to dashboard</span></NavLink>
     </main>
   )
 }
