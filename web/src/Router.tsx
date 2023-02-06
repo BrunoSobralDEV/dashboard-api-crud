@@ -10,7 +10,7 @@ import { SignIn } from './pages/SignIn';
 export function Router() {
   return(
     <Routes>
-      <Route path='*' element={<SignIn />} />
+      <Route path='/' element={<SignIn />} />
       <Route path='dashboard' element={<Dashboard />}>
         <Route path='' element={<RandomUsers />} />
         <Route path='httpapi' element={<Http />} />
