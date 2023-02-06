@@ -26,8 +26,8 @@ export function CreateModal({showModal, handleClose}: Create) {
     
   }, [showModal]);
 
-  async function handlePostData(e) {
-    e.preventDefault();
+  async function handlePostData(event: any) {
+    event.preventDefault();
 
     const response = await axios.post('http://localhost:3000/customers', {
       name,
@@ -115,8 +115,8 @@ export function UpdateModal({showModal, handleClose}: Create) {
   const [id, setID] = useState(0);
 
 
-  async function handlePostData(e) {
-    e.preventDefault();
+  async function handlePostData(event: any) {
+    event.preventDefault();
 
     await axios.put(`http://localhost:3000/customers/${id}`, {
       name,

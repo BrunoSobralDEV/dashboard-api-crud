@@ -167,7 +167,7 @@ export function Customers() {
       }
       <nav aria-label="Page navigation" className=' d-flex justify-content-end'>
         <ul className="pagination">
-          <li className="page-item"><span role="button" onClick={() => setCurrentPage(1)} className="page-link" href="#">1</span></li>
+          <li className="page-item"><span role="button" onClick={() => setCurrentPage(1)} className="page-link">1</span></li>
           {/* <li className="page-item"><span role="button" onClick={() => setCurrentPage(2)} className="page-link" href="#">2</span></li>
           <li className="page-item"><span role="button" onClick={() => setCurrentPage(3)} className="page-link" href="#">3</span></li> */}
         </ul>
